@@ -24,7 +24,7 @@ UNPACK_SENTINEL =	edksetup.sh
 include ../Makefile.targ
 
 STRAPPROTO=	$(PWD)/../../../proto.strap
-TOOLSPROTO=	$(PWD)/../../illumos/usr/src/tools/proto/root_i386-nd
+PROTO=	$(PWD)/../../../proto
 MAKE_ARGS+=	AS=$(STRAPPROTO)/usr/gnu/bin/gas \
 		AR=$(STRAPPROTO)/usr/gnu/bin/gar \
 		LD=$(STRAPPROTO)/usr/gnu/bin/gld \
@@ -44,7 +44,7 @@ all: $(VER.64)/$(UNPACK_SENTINEL)
 	ln -sf $(STRAPPROTO)/usr/gnu/bin/gar $(VER.64)/Build/ar
 	ln -sf $(STRAPPROTO)/usr/gnu/bin/gobjcopy $(VER.64)/Build/objcopy
 	ln -sf /opt/local/bin/nasm $(VER.64)/Build/nasm
-	ln -sf $(TOOLSPROTO)/opt/onbld/bin/i386/iasl $(VER.64)/Build/iasl
+	ln -sf $(PROTO)/usr/sbin/iasl $(VER.64)/Build/iasl
 	$(MAKE) $(MAKE_ARGS) ARCH=$(ARCH) -C $(VER.64)/BaseTools
 	bash -c "cd $(VER.64); source edksetup.sh; $(MAKE) $(MAKE_ARGS) ARCH=$(ARCH) -C BhyvePkg/Csm/BhyveCsm16"
 	bash -c "cd $(VER.64); source edksetup.sh; export ILGCC_BIN=$(PWD)/$(VER.64)/Build/; build -t ILGCC -a $(ARCH) -b $(UEFI_TARGET) -p BhyvePkg/BhyvePkgX64.dsc -DDEBUG_ON_SERIAL_PORT=TRUE -DFD_SIZE_2MB -DCSM_ENABLE=TRUE"
